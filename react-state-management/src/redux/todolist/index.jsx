@@ -1,57 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux' //ini useDispatch dan useSelector dari react-redux
-
+import {addTodo, delTodo} from "./action/todo"
 //Actions Constant
-const ADD = "ADD_TODO"
-const DEL = "DELETE_TODO"
-const LOAD = "LOAD_TODO"
 
-//Actions
-const addTodo = (todo) => ({
-  type: ADD,
-  payload: {
-    id: Math.random().toString(),
-    todo: todo
-  }
-})
-
-const delTodo = (id) => ({
-  type: DEL,
-  payload:id
-})
 
 //initial stata /kondisi awal -> ketika object di load pertama kali
-const initState = {
-  todos: []
-}
-
-//reducer function
-export const todoReducer = (state = initState, action) => {
-  switch (action.type) {
-    case ADD:
-      const {id, todo} = action.payload
-      return{
-        ...state,
-        todos: [
-          ...state.todos, 
-          {
-            id: id, 
-            todo: todo
-          }
-        ]
-      }
-    case DEL:
-      const afterDelete = state.todos.filter(item => item.id !== action.payload)
-      return{
-        ...state,
-        todos: afterDelete
-      }
-    default:
-      return state;
-  }
-}
-
-
 export default function TodoList() {
   const [todo, setTodo] = useState("") //todo untuk menyimpan hasil dari element input
   const dispatch = useDispatch()
@@ -85,6 +38,25 @@ export default function TodoList() {
           </ul>
         )
       }
+
+      <div>
+        <h1>TodoList</h1>
+        <ul>
+          <li>
+            {
+              listTodos.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <li>
+                      {item.todo}
+                    </li>
+                  </div>
+                );
+              })
+            }
+          </li>
+        </ul>
+      </div>
     </div>
   )
 }

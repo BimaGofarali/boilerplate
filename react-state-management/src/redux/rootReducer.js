@@ -1,9 +1,9 @@
 import {combineReducers} from "redux"
-import { counterReducer } from "./counter/counterReducer"
-import {todoReducer} from "./todolist/index"
+// import { counterReducer } from "./counter/counterReducer"
+import {todoReducer} from "./todolist/reducer/todo"
 
 const rootReducer = combineReducers({
-  count: counterReducer,
+  // count: counterReducer,
   todos: todoReducer
 })
 
